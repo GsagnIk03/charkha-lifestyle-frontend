@@ -36,7 +36,7 @@ export default function Home() {
     <div>
       <header style={{ padding: '20px 48px', borderBottom: '1px solid var(--border)' }}>
         <span className="serif" style={{ fontSize: 24 }}>
-          ATELIER
+          CHARKHA LIFESTYLE
         </span>
       </header>
 
