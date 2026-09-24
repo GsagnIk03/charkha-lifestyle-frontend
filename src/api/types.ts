@@ -1,4 +1,4 @@
-// Mirrors the atelier-backend repo's app/models.py — keep the two in
+// Mirrors the charkha-lifestyle-backend repo's app/models.py — keep the two in
 // sync by hand, across repos, for now.
 
 export type ProductStatus = 'live' | 'draft';
