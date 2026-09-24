@@ -1,4 +1,4 @@
-# Atelier — Frontend
+# Charkha Lifestyle — Frontend
 
 React + TypeScript, built with Vite. Routing matches the pages in the
 [approved design canvas](https://claude.ai/code/artifact/0a1f84d7-6dee-43e5-8d32-6c514f68b1a1).
