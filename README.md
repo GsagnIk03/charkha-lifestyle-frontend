@@ -5,7 +5,7 @@ React + TypeScript, built with Vite. Routing matches the pages in the
 
 The API this talks to, and all the AWS infrastructure (including the S3
 bucket + CloudFront distribution this repo's own build gets deployed to),
-live in the separate **atelier-backend** repo — see its `infra/` folder.
+live in the separate **charkha-lifestyle-backend** repo — see its `infra/` folder.
 
 ## Setup
 
@@ -21,7 +21,7 @@ npm run dev
   Checkout, Login, AdminDashboard, TeamEdit).
 - `src/api/client.ts` — fetch wrapper; will take a Cognito access token once
   auth is wired up.
-- `src/api/types.ts` — TypeScript types mirroring the **atelier-backend**
+- `src/api/types.ts` — TypeScript types mirroring the **charkha-lifestyle-backend**
   repo's `app/models.py` Pydantic models. Keep the two in sync by hand,
   across repos, until there's a shared schema.
 - `src/styles/tokens.css` — the color/type tokens from the design canvas
@@ -41,7 +41,7 @@ npm run dev
 ## Deploy
 
 Build output (`npm run build` → `dist/`) is a static bundle meant for the
-S3 bucket + CloudFront distribution defined in **atelier-backend**'s
+S3 bucket + CloudFront distribution defined in **charkha-lifestyle-backend**'s
 `infra/template.yaml` (deploy that stack first — its Outputs give you the
 bucket name and distribution ID). Then, from this repo:
 
