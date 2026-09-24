@@ -10,7 +10,7 @@ import type { Product } from '../api/types';
  *
  * Submitting here creates an InventoryChangeRequest (status "pending") —
  * it never writes to the Product directly. Only the owner's decision on
- * the dashboard does that (see the atelier-backend repo's
+ * the dashboard does that (see the charkha-lifestyle-backend repo's
  * app/routers/inventory_requests.py).
  */
 export default function TeamEdit() {
