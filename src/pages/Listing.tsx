@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { apiRequest } from '../api/client';
-import type { Product } from '../api/types';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { apiRequest } from "../api/client";
+import type { Product } from "../api/types";
 
 /**
  * Category / listing page. Visual reference: artboard "Product Listing" at
@@ -18,7 +18,9 @@ export default function Listing() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    apiRequest<Product[]>(`/products?category=${encodeURIComponent(categorySlug ?? '')}`)
+    apiRequest<Product[]>(
+      `/products?category=${encodeURIComponent(categorySlug ?? "")}`,
+    )
       .then((data) => {
         if (!cancelled) setProducts(data);
       })
@@ -31,21 +33,53 @@ export default function Listing() {
   }, [categorySlug]);
 
   return (
-    <div style={{ padding: '32px 48px' }}>
-      <h1 style={{ fontSize: 28, marginBottom: 24, textTransform: 'capitalize' }}>{categorySlug}</h1>
+    <div style={{ padding: "32px 48px" }}>
+      <h1
+        style={{ fontSize: 28, marginBottom: 24, textTransform: "capitalize" }}
+      >
+        {categorySlug}
+      </h1>
 
       {loading ? (
-        <p style={{ color: 'var(--ink-muted)' }}>Loading&hellip;</p>
+        <p style={{ color: "var(--ink-muted)" }}>Loading&hellip;</p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 28 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+            gap: 28,
+          }}
+        >
           {products.map((p) => (
-            <Link key={p.productId} to={`/product/${p.productId}`} style={{ color: 'inherit' }}>
-              <div style={{ aspectRatio: '3 / 4', background: 'var(--border)' }} />
-              <div style={{ fontSize: 14, fontWeight: 600, marginTop: 8 }}>{p.name}</div>
-              <div style={{ fontSize: 14, fontWeight: 600 }}>&#8377;{p.price.toLocaleString('en-IN')}</div>
+            <Link
+              key={p.productId}
+              to={`/product/${p.productId}`}
+              style={{ color: "inherit" }}
+            >
+              <div
+                style={{
+                  aspectRatio: "3 / 4",
+                  background: "var(--border)",
+                  backgroundImage: p.imageKeys[0]
+                    ? `url(${p.imageKeys[0]})`
+                    : undefined,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+              <div style={{ fontSize: 14, fontWeight: 600, marginTop: 8 }}>
+                {p.name}
+              </div>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>
+                &#8377;{p.price.toLocaleString("en-IN")}
+              </div>
             </Link>
           ))}
-          {products.length === 0 && <p style={{ color: 'var(--ink-muted)' }}>No products in this category yet.</p>}
+          {products.length === 0 && (
+            <p style={{ color: "var(--ink-muted)" }}>
+              No products in this category yet.
+            </p>
+          )}
         </div>
       )}
     </div>

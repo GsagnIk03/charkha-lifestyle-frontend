@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { apiRequest } from '../api/client';
-import type { Product } from '../api/types';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { apiRequest } from "../api/client";
+import type { Product } from "../api/types";
 
 /**
  * Visual reference: artboard "Product Detail" at
@@ -19,25 +19,40 @@ export default function ProductDetail() {
   }, [productId]);
 
   if (!product) {
-    return <div style={{ padding: '32px 48px', color: 'var(--ink-muted)' }}>Loading&hellip;</div>;
+    return (
+      <div style={{ padding: "32px 48px", color: "var(--ink-muted)" }}>
+        Loading&hellip;
+      </div>
+    );
   }
 
   return (
-    <div style={{ display: 'flex', gap: 48, padding: '32px 48px' }}>
-      <div style={{ flex: '0 0 500px', aspectRatio: '3 / 4', background: 'var(--border)' }} />
+    <div style={{ display: "flex", gap: 48, padding: "32px 48px" }}>
+      <div
+        style={{
+          flex: "0 0 500px",
+          aspectRatio: "3 / 4",
+          background: "var(--border)",
+          backgroundImage: product.imageKeys[0]
+            ? `url(${product.imageKeys[0]})`
+            : undefined,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <div style={{ flex: 1, maxWidth: 460 }}>
         <h1 style={{ fontSize: 28 }}>{product.name}</h1>
-        <div style={{ fontSize: 24, fontWeight: 600, margin: '12px 0' }}>
-          &#8377;{product.price.toLocaleString('en-IN')}
+        <div style={{ fontSize: 24, fontWeight: 600, margin: "12px 0" }}>
+          &#8377;{product.price.toLocaleString("en-IN")}
         </div>
-        <p style={{ color: 'var(--ink-muted)' }}>{product.description}</p>
+        <p style={{ color: "var(--ink-muted)" }}>{product.description}</p>
         <button
           style={{
             height: 48,
-            padding: '0 24px',
-            background: 'var(--accent)',
-            color: '#fff',
-            border: 'none',
+            padding: "0 24px",
+            background: "var(--accent)",
+            color: "#fff",
+            border: "none",
             fontWeight: 600,
             marginTop: 16,
           }}
