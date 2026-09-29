@@ -1,4 +1,13 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';
+// Trailing slash stripped defensively — AWS Lambda Function URLs are shown
+// (and copy-pasted) with a trailing slash by default, e.g.
+// "https://xxxx.lambda-url.ap-south-1.on.aws/", and every call site below
+// builds `${API_BASE_URL}${path}` with `path` already starting with "/"
+// (e.g. "/products"). Without this, a trailing slash in the env var turns
+// into "https://.../ /products" (a literal double slash), which some
+// backends/routers treat as a different, non-matching path.
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000"
+).replace(/\/+$/, "");
 
 export class ApiError extends Error {
   status: number;
@@ -9,7 +18,7 @@ export class ApiError extends Error {
 }
 
 type RequestOptions = {
-  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE';
+  method?: "GET" | "POST" | "PATCH" | "DELETE";
   body?: unknown;
   accessToken?: string;
 };
@@ -19,12 +28,17 @@ type RequestOptions = {
  * the stored session (e.g. amazon-cognito-identity-js or aws-amplify/auth)
  * and get attached here as a Bearer token.
  */
-export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
+export async function apiRequest<T>(
+  path: string,
+  options: RequestOptions = {},
+): Promise<T> {
   const res = await fetch(`${API_BASE_URL}${path}`, {
-    method: options.method ?? 'GET',
+    method: options.method ?? "GET",
     headers: {
-      'Content-Type': 'application/json',
-      ...(options.accessToken ? { Authorization: `Bearer ${options.accessToken}` } : {}),
+      "Content-Type": "application/json",
+      ...(options.accessToken
+        ? { Authorization: `Bearer ${options.accessToken}` }
+        : {}),
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
