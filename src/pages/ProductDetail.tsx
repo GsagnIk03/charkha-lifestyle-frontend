@@ -57,7 +57,7 @@ export default function ProductDetail() {
 
   if (loading || !product) {
     return (
-      <div style={{ padding: "32px 48px", color: "var(--ink-muted)" }}>
+      <div className="page-shell" style={{ color: "var(--ink-muted)" }}>
         Loading&hellip;
       </div>
     );
@@ -88,12 +88,11 @@ export default function ProductDetail() {
   }
 
   return (
-    <div style={{ padding: "32px 48px" }}>
-      <div style={{ display: "flex", gap: 48, flexWrap: "wrap" }}>
+    <div className="page-shell">
+      <div className="pd-layout">
         <div
+          className="pd-image"
           style={{
-            flex: "0 0 460px",
-            aspectRatio: "3 / 4",
             background: "var(--border)",
             backgroundImage: product.imageKeys[0]
               ? `url(${product.imageKeys[0]})`
@@ -103,7 +102,7 @@ export default function ProductDetail() {
           }}
         />
 
-        <div style={{ flex: "1 1 340px", maxWidth: 460 }}>
+        <div className="pd-info">
           <h1 style={{ fontSize: 26 }}>{product.name}</h1>
           <div style={{ fontSize: 26, fontWeight: 600, margin: "10px 0" }}>
             &#8377;{product.price.toLocaleString("en-IN")}
@@ -281,13 +280,7 @@ export default function ProductDetail() {
       {relatedProducts.length > 0 && (
         <div style={{ marginTop: 56 }}>
           <h2 style={{ fontSize: 20, marginBottom: 20 }}>You may also like</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-              gap: 24,
-            }}
-          >
+          <div className="product-grid">
             {relatedProducts.map((p) => (
               <ProductTile key={p.productId} product={p} />
             ))}

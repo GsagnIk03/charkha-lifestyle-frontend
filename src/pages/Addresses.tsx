@@ -65,7 +65,7 @@ export default function Addresses() {
   }
 
   return (
-    <div style={{ padding: "32px 48px", maxWidth: 640 }}>
+    <div className="page-shell" style={{ maxWidth: 640 }}>
       <h1 style={{ fontSize: 24, marginBottom: 24 }}>Your Addresses</h1>
 
       {addresses.length === 0 && !showForm && (
@@ -85,13 +85,11 @@ export default function Addresses() {
         {addresses.map((address) => (
           <div
             key={address.addressId}
+            className="address-card"
             style={{
               border: "1px solid var(--border)",
               borderRadius: 4,
               padding: 16,
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 16,
             }}
           >
             <div>
@@ -238,7 +236,7 @@ export default function Addresses() {
             onChange={(e) => setForm({ ...form, line2: e.target.value })}
             style={{ border: "1px solid var(--border)", padding: 12 }}
           />
-          <div style={{ display: "flex", gap: 12 }}>
+          <div className="form-row">
             <input
               required
               placeholder="City"

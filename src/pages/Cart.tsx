@@ -52,7 +52,7 @@ export default function Cart() {
 
   if (loading) {
     return (
-      <div style={{ padding: "32px 48px", color: "var(--ink-muted)" }}>
+      <div className="page-shell" style={{ color: "var(--ink-muted)" }}>
         Loading&hellip;
       </div>
     );
@@ -60,7 +60,7 @@ export default function Cart() {
 
   if (items.length === 0) {
     return (
-      <div style={{ padding: "32px 48px" }}>
+      <div className="page-shell">
         <h1 style={{ fontSize: 24, marginBottom: 24 }}>Shopping Bag</h1>
         <p style={{ color: "var(--ink-muted)" }}>Your bag is empty.</p>
         <Link
@@ -74,7 +74,7 @@ export default function Cart() {
   }
 
   return (
-    <div style={{ padding: "32px 48px", maxWidth: 720 }}>
+    <div className="page-shell" style={{ maxWidth: 720 }}>
       <h1 style={{ fontSize: 24, marginBottom: 24 }}>Shopping Bag</h1>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -85,17 +85,16 @@ export default function Cart() {
           return (
             <div
               key={item.productId}
+              className="cart-item"
               style={{
-                display: "flex",
-                gap: 16,
                 borderBottom: "1px solid var(--border)",
                 paddingBottom: 16,
               }}
             >
               <Link
                 to={`/product/${product.productId}`}
+                className="cart-item-image"
                 style={{
-                  flex: "0 0 100px",
                   aspectRatio: "3 / 4",
                   background: "var(--border)",
                   backgroundImage: product.imageKeys[0]
@@ -213,6 +212,8 @@ export default function Cart() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "wrap",
+          gap: 12,
           marginTop: 24,
         }}
       >

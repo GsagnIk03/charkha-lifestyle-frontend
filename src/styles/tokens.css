@@ -17,13 +17,16 @@
   --charcoal-deep: oklch(18% 0.01 60);
 
   /* Accents (same lightness/chroma, different hue) */
-  --accent: oklch(42% 0.14 28);       /* burgundy — primary CTA, price, links */
+  --accent: oklch(42% 0.14 28); /* burgundy — primary CTA, price, links */
   --accent-hover: oklch(35% 0.14 28);
-  --accent-secondary: oklch(42% 0.14 160); /* muted teal/green — tailoring, "live" status */
+  --accent-secondary: oklch(
+    42% 0.14 160
+  ); /* muted teal/green — tailoring, "live" status */
 
   /* Type */
-  --font-display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
-  --font-body: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  --font-body:
+    "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -37,7 +40,10 @@ body {
   font-family: var(--font-body);
 }
 
-h1, h2, h3, .serif {
+h1,
+h2,
+h3,
+.serif {
   font-family: var(--font-display);
   font-weight: 400;
   margin: 0;
@@ -51,4 +57,192 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+/*
+  Responsive layout utilities — mobile-only overrides for the storefront
+  pages/components added or touched while building out the header, search,
+  product detail, cart, and address book. React inline styles always beat
+  CSS regardless of media query, so anything that needs a different value
+  on a small screen has to live here instead of in a style={{}} prop. Each
+  class's base (outside the media query) rule intentionally repeats the
+  same value the component's original inline style used, so desktop is
+  visually unchanged; only the @media (max-width: 768px) block below
+  changes anything, and only on small screens.
+*/
+
+.page-shell {
+  padding: 32px 48px;
+}
+
+.hero-section {
+  padding: 64px 48px;
+}
+
+.hero-heading {
+  font-size: 44px;
+}
+
+.section-shell {
+  padding: 0 48px 64px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.header-bar {
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.header-nav {
+  display: flex;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.header-search {
+  flex: 1 1 240px;
+  min-width: 200px;
+  max-width: 480px;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.pd-layout {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.pd-image {
+  flex: 0 0 460px;
+  aspect-ratio: 3 / 4;
+}
+
+.pd-info {
+  flex: 1 1 340px;
+  max-width: 460px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 16px;
+}
+
+.cart-item-image {
+  flex: 0 0 100px;
+}
+
+.address-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .page-shell {
+    padding: 20px 16px;
+  }
+
+  .hero-section {
+    padding: 40px 16px;
+  }
+
+  .section-shell {
+    padding: 0 16px 40px;
+  }
+
+  .hero-heading {
+    font-size: 28px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  /* Header reflows from one row (logo · nav · search · icons) into three:
+     logo+icons on top, the full-width search box, then a horizontally
+     scrollable category strip — the common mobile storefront pattern. */
+  .header-bar {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .header-search {
+    order: 2;
+    flex-basis: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .header-nav {
+    order: 3;
+    flex-basis: 100%;
+    gap: 18px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .header-icons {
+    gap: 14px;
+    margin-left: auto;
+  }
+
+  /* Product detail: image stacks above the buy box instead of sitting
+     beside it, and the buy box drops its fixed max-width. */
+  .pd-layout {
+    gap: 20px;
+  }
+
+  .pd-image {
+    flex: 1 1 100%;
+    aspect-ratio: 4 / 5;
+  }
+
+  .pd-info {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  /* Cart rows: smaller thumbnail, tighter gap so quantity controls and
+     the remove link stay on screen without horizontal scrolling. */
+  .cart-item {
+    gap: 10px;
+  }
+
+  .cart-item-image {
+    flex-basis: 84px;
+  }
+
+  /* Address cards: action buttons drop below the address text instead of
+     squeezing into a narrow right-hand column. */
+  .address-card {
+    flex-direction: column;
+  }
+
+  /* City/State/Pincode (and similar) form rows stack instead of squeezing
+     three inputs into one line. */
+  .form-row {
+    flex-direction: column;
+  }
 }
