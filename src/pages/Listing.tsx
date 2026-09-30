@@ -18,8 +18,14 @@ export default function Listing() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
+    // status=live so customers only see published products (this endpoint
+    // otherwise also returns drafts, which is correct for the admin
+    // dashboard's own product list but wrong here). limit=100 is a
+    // generous explicit ceiling — well above any current category's count
+    // — instead of relying on the API's default of 50, so this keeps
+    // showing everything if the catalog grows past that later.
     apiRequest<Product[]>(
-      `/products?category=${encodeURIComponent(categorySlug ?? "")}`,
+      `/products?category=${encodeURIComponent(categorySlug ?? "")}&status=live&limit=100`,
     )
       .then((data) => {
         if (!cancelled) setProducts(data);

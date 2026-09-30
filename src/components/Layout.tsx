@@ -1,12 +1,21 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "./Header";
 
 /**
- * Shared page frame. The storefront header/footer live inside individual
- * page components for now (matching the mockups at
- * https://claude.ai/code/artifact/0a1f84d7-6dee-43e5-8d32-6c514f68b1a1) —
- * pull the header/footer markup out into components here once the visual
- * design is finalized and stops moving.
+ * Shared page frame. Renders the storefront header (logo + category nav)
+ * above every page except the admin dashboard and its sub-routes — the
+ * dashboard is an internal tool for the store owner/team, not somewhere a
+ * customer should be shopping from, so it intentionally gets no category
+ * buttons and no link back into the storefront nav.
  */
 export default function Layout() {
-  return <Outlet />;
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  return (
+    <>
+      {!isAdminRoute && <Header />}
+      <Outlet />
+    </>
+  );
 }

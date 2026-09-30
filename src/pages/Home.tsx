@@ -34,17 +34,6 @@ export default function Home() {
 
   return (
     <div>
-      <header
-        style={{
-          padding: "20px 48px",
-          borderBottom: "1px solid var(--border)",
-        }}
-      >
-        <span className="serif" style={{ fontSize: 24 }}>
-          CHARKHA LIFESTYLE
-        </span>
-      </header>
-
       <section style={{ padding: "64px 48px" }}>
         <h1 style={{ fontSize: 44 }}>Considered clothing, made to last.</h1>
         <p style={{ color: "var(--ink-muted)", maxWidth: 420 }}>
