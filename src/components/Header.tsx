@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PRODUCT_CATEGORIES } from "../api/types";
+import logo from "../assets/logo.jpg";
 
 /**
  * Shared site header — shown on every storefront page via Layout.tsx.
@@ -20,10 +21,12 @@ export default function Header() {
         gap: 16,
       }}
     >
-      <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-        <span className="serif" style={{ fontSize: 24 }}>
-          CHARKHA LIFESTYLE
-        </span>
+      <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src={logo}
+          alt="Charkha — nurses your style"
+          style={{ height: 48, width: 48, borderRadius: 6 }}
+        />
       </Link>
 
       <nav style={{ display: "flex", gap: 8 }}>
