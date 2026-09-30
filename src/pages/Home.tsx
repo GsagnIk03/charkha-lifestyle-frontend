@@ -49,15 +49,15 @@ export default function Home() {
 
   return (
     <div>
-      <section style={{ padding: "64px 48px" }}>
-        <h1 style={{ fontSize: 44 }}>Considered clothing, made to last.</h1>
+      <section className="hero-section">
+        <h1 className="hero-heading">Considered clothing, made to last.</h1>
         <p style={{ color: "var(--ink-muted)", maxWidth: 420 }}>
           Studio-crafted staples and occasion wear, finished with fabric and fit
           that hold up beyond a season.
         </p>
       </section>
 
-      <section style={{ padding: "0 48px 64px" }}>
+      <section className="section-shell">
         <h2 style={{ fontSize: 24, marginBottom: 24 }}>New Arrivals</h2>
 
         {loading && (
@@ -69,13 +69,7 @@ export default function Home() {
           </p>
         )}
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-            gap: 24,
-          }}
-        >
+        <div className="product-grid">
           {products.map((p) => (
             <Link
               key={p.productId}

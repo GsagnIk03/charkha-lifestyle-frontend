@@ -51,7 +51,7 @@ export default function SearchResults() {
   );
 
   return (
-    <div style={{ padding: "32px 48px" }}>
+    <div className="page-shell">
       <div
         style={{
           display: "flex",
@@ -121,13 +121,7 @@ export default function SearchResults() {
             : "Type something in the search bar above to get started."}
         </p>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-            gap: 24,
-          }}
-        >
+        <div className="product-grid">
           {outcome.results.map((p) => (
             <ProductTile key={p.productId} product={p} />
           ))}

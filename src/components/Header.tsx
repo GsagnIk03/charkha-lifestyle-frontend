@@ -40,15 +40,7 @@ export default function Header() {
         background: "var(--surface)",
       }}
     >
-      <div
-        style={{
-          padding: "14px 48px",
-          display: "flex",
-          alignItems: "center",
-          gap: 40,
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="header-bar">
         <Link
           to="/"
           style={{ display: "flex", alignItems: "center", flexShrink: 0 }}
@@ -60,7 +52,7 @@ export default function Header() {
           />
         </Link>
 
-        <nav style={{ display: "flex", gap: 28, flexShrink: 0 }}>
+        <nav className="header-nav">
           {STOREFRONT_CATEGORIES.map((category) => (
             <Link
               key={category}
@@ -82,8 +74,8 @@ export default function Header() {
 
         <form
           onSubmit={handleSearchSubmit}
+          className="header-search"
           style={{
-            flex: "1 1 240px",
             display: "flex",
             alignItems: "center",
             gap: 10,
@@ -91,8 +83,6 @@ export default function Header() {
             border: "1px solid var(--border)",
             borderRadius: 4,
             padding: "9px 14px",
-            minWidth: 200,
-            maxWidth: 480,
           }}
         >
           <button
@@ -124,15 +114,7 @@ export default function Header() {
           />
         </form>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 24,
-            marginLeft: "auto",
-            flexShrink: 0,
-          }}
-        >
+        <div className="header-icons">
           <HeaderIcon icon={<ProfileIcon />} label="Profile" to="/login" />
           <HeaderIcon icon={<AddressIcon />} label="Address" to="/addresses" />
           <HeaderIcon icon={<HeartIcon />} label="Wishlist" />
