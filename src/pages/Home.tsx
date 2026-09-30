@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiRequest } from "../api/client";
+import { STOREFRONT_CATEGORIES } from "../api/types";
 import type { Product } from "../api/types";
 
 /**
@@ -17,9 +18,23 @@ export default function Home() {
 
   useEffect(() => {
     let cancelled = false;
-    apiRequest<Product[]>("/products?status=live&limit=4")
+    // Fetch more than the 4 shown and filter out Accessories client-side —
+    // the backend can't filter "category != X" in one call, and customers
+    // shouldn't see accessories here any more than in the nav (see
+    // STOREFRONT_CATEGORIES in api/types.ts).
+    apiRequest<Product[]>("/products?status=live&limit=20")
       .then((data) => {
-        if (!cancelled) setProducts(data);
+        if (!cancelled) {
+          setProducts(
+            data
+              .filter((p) =>
+                (STOREFRONT_CATEGORIES as readonly string[]).includes(
+                  p.category,
+                ),
+              )
+              .slice(0, 4),
+          );
+        }
       })
       .catch((err) => {
         if (!cancelled) setError(err.message);

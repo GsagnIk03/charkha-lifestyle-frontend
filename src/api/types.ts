@@ -13,6 +13,12 @@ export const PRODUCT_CATEGORIES = [
   "Accessories",
 ] as const;
 
+// The subset customers browse/search — Accessories is deliberately left
+// out (garments only, per the storefront's scope), but stays in
+// PRODUCT_CATEGORIES above so the admin "Add Product" form can still
+// categorize/manage the accessory items already in the catalog.
+export const STOREFRONT_CATEGORIES = ["Men", "Women", "Kids"] as const;
+
 export interface Product {
   productId: string;
   name: string;
